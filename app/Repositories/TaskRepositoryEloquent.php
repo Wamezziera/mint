@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Repositories\TaskRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Entities\Task;
