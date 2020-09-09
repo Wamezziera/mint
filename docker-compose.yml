@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  webapp:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+      - 443:443
+    volumes:
+      - ./docker/nginx/templates:/etc/nginx/templates
+      - .:/var/www/app:cached
+    environment:
+      NGINX_ENVSUBST_TEMPLATE_DIR: /etc/nginx/templates
+      NGINX_ENVSUBST_TEMPLATE_SUFFIX: .nginx
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx/conf.d
+    depends_on:
+      - app
+      - database
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/var/www/app:cached
+    container_name: php
+    ports:
+    - "9000:9000"
+
+  database:
+    image: library/postgres:12-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: webmaster
+      POSTGRES_USER: webmaster
+      POSTGRES_DB: mint_todo
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    restart: always
+    ports:
+      - 8082:8080
+    links:
+      - database
+
+volumes:
+  database:
+    driver: 'local'
+
