@@ -17,13 +17,13 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by_id')->nullable();
+            $table->unsignedBigInteger('updated_by_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('created_by')->on('users')
+            $table->foreign('created_by_id')->on('users')
                 ->references('id')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('updated_by')->on('users')
+            $table->foreign('updated_by_id')->on('users')
                 ->references('id')->onDelete('cascade')->onUpdate('cascade');
         });
     }
