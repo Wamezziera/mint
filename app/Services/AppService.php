@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Repositories\RepositoryInterface;
 use App\Util\Functions;
 use Carbon\Carbon;
 
@@ -16,10 +15,6 @@ use Carbon\Carbon;
  */
 class AppService
 {
-    /**
-     * @var RepositoryInterface
-     */
-    protected $repository;
 
     /**
      * @param array|object $data

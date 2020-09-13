@@ -17,9 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 })->name('auth.show');
+
 Route::middleware('auth:api')->delete('/user/logout', function (Request $request) {
     return $request->user()->token()->revoke();
 })->name('auth.delete');
+
+Route::group(['namespace' => 'Api'], function () {
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::post('register', 'RegisterController');
+        Route::post('login', 'LoginController');
+        Route::post('logout', 'LogoutController')->middleware('auth:api');
+    });
+});
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:api', ]], function () {
     Route::put('/{id}', 'UserController@update')->name('user.update');
