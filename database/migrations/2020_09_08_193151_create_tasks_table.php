@@ -21,9 +21,9 @@ class CreateTasksTable extends Migration
             $table->unsignedBigInteger('updated_by_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('created_by_id')->on('users')
+            $table->foreign('creator_id')->on('users')
                 ->references('id')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('updated_by_id')->on('users')
+            $table->foreign('updater_id')->on('users')
                 ->references('id')->onDelete('cascade')->onUpdate('cascade');
         });
     }
