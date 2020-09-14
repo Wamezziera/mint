@@ -33,7 +33,7 @@ class UserService extends AppService
     public function find($id, $skipPresenter = false)
     {
         $user = $this->repository
-            ->with('task')
+            ->with(['tasksUpdater', 'tasksCreator'])
             ->find($id);
 
         return $user;
