@@ -14,7 +14,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'created_by_id', 'updated_by_id'
+        'name', 'creator_id', 'updater_id'
     ];
 
     public function transform ()
@@ -26,17 +26,17 @@ class Task extends Model
      * relations with User
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function createdBy()
+    public function creator()
     {
-        return $this->belongsTo(User::class, 'created_by_id', 'id');
+        return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 
     /**
      * relations with User
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function updatedBy()
+    public function updater()
     {
-        return $this->belongsTo(User::class, 'updated_by_id', 'id');
+        return $this->belongsTo(User::class, 'updater_id', 'id');
     }
 }

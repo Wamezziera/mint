@@ -2,7 +2,7 @@
 
 namespace App\Services\Traits;
 
-use App\Repositories\RepositoryInterface;
+use Prettus\Repository\Contracts\RepositoryInterface;
 
 trait CrudMethods
 {

@@ -48,18 +48,18 @@ class User extends Authenticatable
      * create Task
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tasksCreated()
+    public function tasksCreator()
     {
-        return $this->hasMany(Task::class, 'created_by_id', 'id');
+        return $this->hasMany(Task::class, 'creator_id', 'id');
     }
 
     /**
      * update Task
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tasksUpdated()
+    public function tasksUpdater()
     {
-        return $this->hasMany(Task::class, 'updated_by_id', 'id');
+        return $this->hasMany(Task::class, 'updater_id', 'id');
     }
 
 }
