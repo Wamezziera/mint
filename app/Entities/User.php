@@ -50,7 +50,7 @@ class User extends Authenticatable
      */
     public function tasksCreated()
     {
-        return $this->hasMany(Task::class, 'created_by', 'id');
+        return $this->hasMany(Task::class, 'created_by_id', 'id');
     }
 
     /**
@@ -59,7 +59,7 @@ class User extends Authenticatable
      */
     public function tasksUpdated()
     {
-        return $this->hasMany(Task::class, 'updated_by', 'id');
+        return $this->hasMany(Task::class, 'updated_by_id', 'id');
     }
 
 }
