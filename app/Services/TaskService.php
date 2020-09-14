@@ -30,9 +30,9 @@ class TaskService extends AppService
     {
         return $this->repository
             ->orderBy('created_at')
-            ->with(['creatorId' => function ($query) {
+            ->with(['creator' => function ($query) {
                 return $query->select(['name', 'id']);
-            }, 'updaterId' => function ($query) {
+            }, 'updater' => function ($query) {
                 return $query->select(['name', 'id']);
             }])
             ->paginate($limit);
@@ -41,7 +41,7 @@ class TaskService extends AppService
     public function find($id, $skipPresenter = false)
     {
         return $this->repository
-            ->with(['creatorId', 'updaterId'])
+            ->with(['creator', 'updater'])
             ->skipPresenter($skipPresenter)
             ->find($id);
     }
@@ -66,7 +66,7 @@ class TaskService extends AppService
      */
     public function update(array $data, $id)
     {
-        $data['updated_by_id'] = Auth::user()->id;
+        $data['updater_id'] = Auth::user()->id;
 
         return $this->repository->update($data, $id);
     }
